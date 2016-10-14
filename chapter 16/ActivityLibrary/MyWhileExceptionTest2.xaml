@@ -1,0 +1,45 @@
+﻿<!--
+ This file is part of the downloadable code for the Apress book:
+ Pro WF: Windows Workflow in .NET 4.0
+ Copyright (c) Bruce Bukovics.  All rights reserved.
+
+ This code is provided as is without warranty of any kind, either expressed
+ or implied, including but not limited to fitness for any particular purpose.
+ You may use the code for any commercial or noncommercial purpose, and combine
+ it with your own code, but cannot reproduce it in whole or in part for
+ publication purposes without prior approval.
+ -->
+<Activity mc:Ignorable="sap" x:Class="ActivityLibrary.MyWhileExceptionTest2" sap:VirtualizedContainerService.HintSize="352,651" mva:VisualBasic.Settings="Assembly references and imported namespaces for internal implementation" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:local="clr-namespace:ActivityLibrary" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mv="clr-namespace:Microsoft.VisualBasic;assembly=System" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:s1="clr-namespace:System;assembly=System" xmlns:s2="clr-namespace:System;assembly=System.Xml" xmlns:s3="clr-namespace:System;assembly=System.Core" xmlns:s4="clr-namespace:System;assembly=System.ServiceModel" xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities" xmlns:sad="clr-namespace:System.Activities.Debugger;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System" xmlns:scg1="clr-namespace:System.Collections.Generic;assembly=System.ServiceModel" xmlns:scg2="clr-namespace:System.Collections.Generic;assembly=System.Core" xmlns:scg3="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:sl="clr-namespace:System.Linq;assembly=System.Core" xmlns:st="clr-namespace:System.Text;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Sequence sad:XamlDebuggerXmlReader.FileName="C:\WF\WindowsWorkflowWork\code\chapter 14\ActivityLibrary\MyWhileExceptionTest2.xaml" sap:VirtualizedContainerService.HintSize="312,611">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:Int32" Name="count" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg3:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <local:MyWhileHandleException Condition="[count &lt; 3]" sap:VirtualizedContainerService.HintSize="290,487">
+      <local:MyWhileHandleException.Body>
+        <Sequence sap:VirtualizedContainerService.HintSize="264,407">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg3:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign sap:VirtualizedContainerService.HintSize="242,58">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Int32">[count]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Int32">[count + 1]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <WriteLine sap:VirtualizedContainerService.HintSize="242,61" Text="[String.Format(&quot;Count = {0}&quot;, count)]" />
+          <Delay Duration="[TimeSpan.FromSeconds(1)]" sap:VirtualizedContainerService.HintSize="242,22" />
+          <Throw Exception="[New NullReferenceException(&quot;Exception was thrown&quot;)]" sap:VirtualizedContainerService.HintSize="242,22" />
+        </Sequence>
+      </local:MyWhileHandleException.Body>
+    </local:MyWhileHandleException>
+  </Sequence>
+</Activity>

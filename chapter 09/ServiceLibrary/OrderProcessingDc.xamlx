@@ -1,0 +1,70 @@
+﻿<!--
+ This file is part of the downloadable code for the Apress book:
+ Pro WF: Windows Workflow in .NET 4.0
+ Copyright (c) Bruce Bukovics.  All rights reserved.
+
+ This code is provided as is without warranty of any kind, either expressed
+ or implied, including but not limited to fitness for any particular purpose.
+ You may use the code for any commercial or noncommercial purpose, and combine
+ it with your own code, but cannot reproduce it in whole or in part for
+ publication purposes without prior approval.
+ -->
+<WorkflowService mc:Ignorable="sap" ConfigurationName="OrderProcessingDc" sap:VirtualizedContainerService.HintSize="307,766" Name="OrderProcessingDc" mva:VisualBasic.Settings="Assembly references and imported namespaces serialized as XML namespaces" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/servicemodel" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mv="clr-namespace:Microsoft.VisualBasic;assembly=System" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://tempuri.org/" xmlns:p1="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:s="clr-namespace:ServiceLibrary;assembly=ServiceLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" xmlns:s1="clr-namespace:System;assembly=mscorlib" xmlns:s2="clr-namespace:System;assembly=System" xmlns:s3="clr-namespace:System;assembly=System.Xml" xmlns:s4="clr-namespace:System;assembly=System.Core" xmlns:s5="clr-namespace:ServiceLibrary;assembly=ServiceLibrary" xmlns:s6="clr-namespace:System;assembly=mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" xmlns:sad="clr-namespace:System.Activities.Debugger;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System" xmlns:scg1="clr-namespace:System.Collections.Generic;assembly=System.ServiceModel" xmlns:scg2="clr-namespace:System.Collections.Generic;assembly=System.Core" xmlns:scg3="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:sd1="clr-namespace:System.Data;assembly=System.Data.DataSetExtensions" xmlns:sl="clr-namespace:System.Linq;assembly=System.Core" xmlns:ssa="clr-namespace:System.ServiceModel.Activities;assembly=System.ServiceModel.Activities" xmlns:st="clr-namespace:System.Text;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <p1:Sequence sad:XamlDebuggerXmlReader.FileName="C:\WF\WindowsWorkflowWork\code\chapter 09\ServiceLibrary\OrderProcessingDc.xamlx" sap:VirtualizedContainerService.HintSize="277,736" mva:VisualBasic.Settings="Assembly references and imported namespaces serialized as XML namespaces">
+    <p1:Sequence.Variables>
+      <p1:Variable x:TypeArguments="CorrelationHandle" Name="__handle1" />
+      <p1:Variable x:TypeArguments="s5:OrderProcessingRequestDc" Name="Request" />
+      <p1:Variable x:TypeArguments="s5:OrderProcessingResponseDc" Default="[New OrderProcessingResponseDc()]" Name="Response" />
+    </p1:Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg3:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Receive x:Name="__ReferenceID0" CanCreateInstance="True" sap:VirtualizedContainerService.HintSize="255,90" OperationName="ProcessOrder" ServiceContractName="p:IOrderProcessing">
+      <Receive.CorrelationInitializers>
+        <RequestReplyCorrelationInitializer CorrelationHandle="[__handle1]" />
+      </Receive.CorrelationInitializers>
+      <ReceiveMessageContent>
+        <p1:OutArgument x:TypeArguments="s5:OrderProcessingRequestDc">[Request]</p1:OutArgument>
+      </ReceiveMessageContent>
+    </Receive>
+    <p1:Assign sap:VirtualizedContainerService.HintSize="255,58">
+      <p1:Assign.To>
+        <p1:OutArgument x:TypeArguments="x:Int32">[Response.OrderId]</p1:OutArgument>
+      </p1:Assign.To>
+      <p1:Assign.Value>
+        <p1:InArgument x:TypeArguments="x:Int32">[New Random().Next(Int32.MaxValue)]</p1:InArgument>
+      </p1:Assign.Value>
+    </p1:Assign>
+    <p1:Assign sap:VirtualizedContainerService.HintSize="255,58">
+      <p1:Assign.To>
+        <p1:OutArgument x:TypeArguments="x:String">[Response.CreditAuthCode]</p1:OutArgument>
+      </p1:Assign.To>
+      <p1:Assign.Value>
+        <p1:InArgument x:TypeArguments="x:String">[New Random().Next(100000).ToString()]</p1:InArgument>
+      </p1:Assign.Value>
+    </p1:Assign>
+    <p1:Assign sap:VirtualizedContainerService.HintSize="255,58">
+      <p1:Assign.To>
+        <p1:OutArgument x:TypeArguments="s1:DateTime">[Response.ShipDate]</p1:OutArgument>
+      </p1:Assign.To>
+      <p1:Assign.Value>
+        <p1:InArgument x:TypeArguments="s1:DateTime">[Date.Now.AddDays(3).Date]</p1:InArgument>
+      </p1:Assign.Value>
+    </p1:Assign>
+    <p1:Assign sap:VirtualizedContainerService.HintSize="255,58">
+      <p1:Assign.To>
+        <p1:OutArgument x:TypeArguments="x:Boolean">[Response.IsSuccessful]</p1:OutArgument>
+      </p1:Assign.To>
+      <p1:Assign.Value>
+        <p1:InArgument x:TypeArguments="x:Boolean">True</p1:InArgument>
+      </p1:Assign.Value>
+    </p1:Assign>
+    <SendReply Request="{x:Reference __ReferenceID0}" DisplayName="SendReplyToReceive" sap:VirtualizedContainerService.HintSize="255,90">
+      <SendMessageContent>
+        <p1:InArgument x:TypeArguments="s5:OrderProcessingResponseDc">[Response]</p1:InArgument>
+      </SendMessageContent>
+    </SendReply>
+  </p1:Sequence>
+</WorkflowService>

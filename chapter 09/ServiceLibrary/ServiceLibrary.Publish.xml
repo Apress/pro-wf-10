@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="C:\inetpub\wwwroot\ProWF" deleteExistingFiles="True" ftpAnonymousLogin="False" ftpPassiveMode="False" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="False" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
+    <file relUrl="TestWeb.config.xml" publishTime="12/18/2009 16:34:43" />
+    <file relUrl="Web.config" publishTime="12/22/2009 20:18:04" />
+    <file relUrl="Web.config.V1.xml" publishTime="12/22/2009 20:15:42" />
+    <file relUrl="bin/ServiceLibrary.dll" publishTime="12/22/2009 20:17:22" />
+    <file relUrl="bin/ServiceLibrary.pdb" publishTime="12/22/2009 20:17:21" />
+    <file relUrl="OrderProcessing5.xamlx" publishTime="12/20/2009 10:39:46" />
+    <file relUrl="ShipOrder.xamlx" publishTime="12/17/2009 16:49:59" />
+    <file relUrl="OrderProcessing.xamlx" publishTime="12/18/2009 16:46:00" />
+    <file relUrl="CreditApproval.xamlx" publishTime="12/18/2009 10:27:38" />
+    <file relUrl="OrderProcessing4.xamlx" publishTime="12/18/2009 10:39:24" />
+    <file relUrl="Web.config.VFinal.xml" publishTime="12/22/2009 20:16:36" />
+    <file relUrl="ShipOrderContent.xamlx" publishTime="12/17/2009 16:59:05" />
+    <file relUrl="OrderProcessingDc.xamlx" publishTime="12/17/2009 12:21:02" />
+    <file relUrl="OrderProcessing2.xamlx" publishTime="12/17/2009 16:16:54" />
+    <file relUrl="OrderProcessingParams.xamlx" publishTime="12/17/2009 12:21:17" />
+    <file relUrl="OrderProcessing3.xamlx" publishTime="12/17/2009 19:58:54" />
+  </publishProfile>
+</publishData>

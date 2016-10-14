@@ -1,0 +1,56 @@
+﻿<!--
+ This file is part of the downloadable code for the Apress book:
+ Pro WF: Windows Workflow in .NET 4.0
+ Copyright (c) Bruce Bukovics.  All rights reserved.
+
+ This code is provided as is without warranty of any kind, either expressed
+ or implied, including but not limited to fitness for any particular purpose.
+ You may use the code for any commercial or noncommercial purpose, and combine
+ it with your own code, but cannot reproduce it in whole or in part for
+ publication purposes without prior approval.
+ -->
+<Activity mc:Ignorable="sap" x:Class="ActivityLibrary.MyParallelTest" sap:VirtualizedContainerService.HintSize="319,1292" mva:VisualBasic.Settings="Assembly references and imported namespaces for internal implementation" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:local="clr-namespace:ActivityLibrary" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mv="clr-namespace:Microsoft.VisualBasic;assembly=System" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:s1="clr-namespace:System;assembly=System" xmlns:s2="clr-namespace:System;assembly=System.Xml" xmlns:s3="clr-namespace:System;assembly=System.Core" xmlns:s4="clr-namespace:System;assembly=System.ServiceModel" xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities" xmlns:sad="clr-namespace:System.Activities.Debugger;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System" xmlns:scg1="clr-namespace:System.Collections.Generic;assembly=System.ServiceModel" xmlns:scg2="clr-namespace:System.Collections.Generic;assembly=System.Core" xmlns:scg3="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:sl="clr-namespace:System.Linq;assembly=System.Core" xmlns:st="clr-namespace:System.Text;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Sequence sad:XamlDebuggerXmlReader.FileName="C:\WF\WindowsWorkflowWork\code\chapter 14\ActivityLibrary\MyParallelTest.xaml" sap:VirtualizedContainerService.HintSize="279,1252">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:Int32" Name="count" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg3:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <local:MyParallel Condition="[count &lt; 3]" sap:VirtualizedContainerService.HintSize="257,1128">
+      <local:MyParallel.Activities>
+        <Sequence DisplayName="Sequence1" sap:VirtualizedContainerService.HintSize="233,348">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg3:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <WriteLine sap:VirtualizedContainerService.HintSize="211,61" Text="one-one" />
+          <Delay Duration="[TimeSpan.FromSeconds(1)]" sap:VirtualizedContainerService.HintSize="211,22" />
+          <WriteLine sap:VirtualizedContainerService.HintSize="211,61" Text="one-two" />
+        </Sequence>
+        <Sequence DisplayName="Sequence2" sap:VirtualizedContainerService.HintSize="233,348">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg3:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <WriteLine sap:VirtualizedContainerService.HintSize="211,61" Text="two-one" />
+          <Delay Duration="[TimeSpan.FromSeconds(1)]" sap:VirtualizedContainerService.HintSize="211,22" />
+          <WriteLine sap:VirtualizedContainerService.HintSize="211,61" Text="two-two" />
+        </Sequence>
+        <Sequence DisplayName="Sequence3" sap:VirtualizedContainerService.HintSize="233,286">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg3:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <WriteLine sap:VirtualizedContainerService.HintSize="211,61" Text="three-one" />
+          <WriteLine sap:VirtualizedContainerService.HintSize="211,61" Text="three-two" />
+        </Sequence>
+      </local:MyParallel.Activities>
+    </local:MyParallel>
+  </Sequence>
+</Activity>

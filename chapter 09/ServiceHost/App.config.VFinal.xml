@@ -1,0 +1,204 @@
+<?xml version="1.0"?>
+<!--
+ This file is part of the downloadable code for the Apress book:
+ Pro WF: Windows Workflow in .NET 4.0
+ Copyright (c) Bruce Bukovics.  All rights reserved.
+
+ This code is provided as is without warranty of any kind, either expressed
+ or implied, including but not limited to fitness for any particular purpose.
+ You may use the code for any commercial or noncommercial purpose, and combine
+ it with your own code, but cannot reproduce it in whole or in part for
+ publication purposes without prior approval.
+ -->
+<configuration>
+  <system.serviceModel>
+    <services>
+
+      <!--initial self-contained workflow-->
+      <service name="OrderProcessing">
+        <host>
+          <baseAddresses>
+            <add baseAddress="http://localhost:9000/"/>
+          </baseAddresses>
+        </host>
+        <endpoint contract="IOrderProcessing"
+          address="http://localhost:9000/OrderProcessing"
+          binding="wsHttpBinding"
+          bindingConfiguration="OrderProcessingBinding" />
+      </service>
+
+      <!--enhanced to call ShipOrder workflow-->
+      <service name="OrderProcessing2">
+        <host>
+          <baseAddresses>
+            <add baseAddress="http://localhost:9002/"/>
+          </baseAddresses>
+        </host>
+        <endpoint contract="IOrderProcessing"
+          address="http://localhost:9002/OrderProcessing"
+          binding="wsHttpBinding"
+          bindingConfiguration="OrderProcessingBinding" />
+      </service>
+
+      <!--enhanced to call ShipOrder and CreditApproval workflows-->
+      <service name="OrderProcessing3">
+        <host>
+          <baseAddresses>
+            <add baseAddress="http://localhost:9003/"/>
+          </baseAddresses>
+        </host>
+        <endpoint contract="IOrderProcessing"
+          address="http://localhost:9003/OrderProcessing"
+          binding="wsHttpBinding"
+          bindingConfiguration="OrderProcessingBinding" />
+        <endpoint contract="IOrderProcessingCallback"
+          address="http://localhost:9003/OrderProcessingCallback"
+          binding="wsHttpContextBinding" />
+      </service>
+
+      <!--enhanced to call ShipOrder and CreditApproval workflows and
+          use OrderUtilityExtension -->
+      <service name="OrderProcessing4">
+        <host>
+          <baseAddresses>
+            <add baseAddress="http://localhost:9004/"/>
+          </baseAddresses>
+        </host>
+        <endpoint contract="IOrderProcessing"
+          address="http://localhost:9004/OrderProcessing"
+          binding="wsHttpBinding"
+          bindingConfiguration="OrderProcessingBinding" />
+        <endpoint contract="IOrderProcessingCallback"
+          address="http://localhost:9004/OrderProcessingCallback"
+          binding="wsHttpContextBinding" />
+
+        <!--add standard workflowControlEndpoint-->
+        <!--<endpoint kind="workflowControlEndpoint"
+          address="http://localhost:9004/OrderProcessingControl"
+          binding="wsHttpBinding" />-->
+
+      </service>
+
+      <!--enhanced to call ShipOrder and CreditApproval workflows and
+          use OrderUtilityExtension, also sends fault response -->
+      <service name="OrderProcessing5">
+        <host>
+          <baseAddresses>
+            <add baseAddress="http://localhost:9005/"/>
+          </baseAddresses>
+        </host>
+        <endpoint contract="IOrderProcessing"
+          address="http://localhost:9005/OrderProcessing"
+          binding="wsHttpBinding"
+          bindingConfiguration="OrderProcessingBinding" />
+        <endpoint contract="IOrderProcessingCallback"
+          address="http://localhost:9005/OrderProcessingCallback"
+          binding="wsHttpContextBinding" />
+      </service>
+
+      <!--with context correlation-->
+      <service name="ShipOrder">
+        <host>
+          <baseAddresses>
+            <add baseAddress="http://localhost:9031/"/>
+          </baseAddresses>
+        </host>
+        <endpoint contract="IShipOrder"
+          address="http://localhost:9031/ShipOrder"
+          binding="wsHttpContextBinding" />
+      </service>
+
+      <!--with content correlation-->
+      <service name="ShipOrderContent">
+        <host>
+          <baseAddresses>
+            <add baseAddress="http://localhost:9032/"/>
+          </baseAddresses>
+        </host>
+        <endpoint contract="IShipOrder"
+          address="http://localhost:9032/ShipOrder"
+          binding="basicHttpBinding" />
+      </service>
+
+      <service name="CreditApproval">
+        <host>
+          <baseAddresses>
+            <add baseAddress="http://localhost:9033/"/>
+          </baseAddresses>
+        </host>
+        <endpoint contract="ICreditApproval"
+          address="http://localhost:9033/CreditApproval"
+          binding="wsHttpContextBinding" />
+      </service>
+
+    </services>
+    <bindings>
+      <wsHttpBinding>
+        <binding name="OrderProcessingBinding">
+          <security mode="Message">
+            <message clientCredentialType="Windows"
+             algorithmSuite="TripleDesRsa15"
+             establishSecurityContext="true"
+             negotiateServiceCredential="true" />
+          </security>
+        </binding>
+      </wsHttpBinding>
+
+      <wsHttpContextBinding>
+        <!--internally assigns orderId-->
+        <!--<binding name="ClientCreditApprovalBinding"
+          clientCallbackAddress="http://localhost:9003/OrderProcessingCallback"/>-->
+        <!--uses extension to get next orderId-->
+        <!--<binding name="ClientCreditApprovalBinding"
+          clientCallbackAddress="http://localhost:9004/OrderProcessingCallback"/>-->
+        <!--uses extension to get next orderId and sends fault response-->
+        <binding name="ClientCreditApprovalBinding"
+          clientCallbackAddress="http://localhost:9005/OrderProcessingCallback"/>
+      </wsHttpContextBinding>
+
+    </bindings>
+
+    <client>
+
+      <!--with context correlation-->
+      <endpoint name="xxxxClientShipOrder"
+       contract="IShipOrder" binding="wsHttpContextBinding"
+       address="http://localhost:9031/ShipOrder" />
+
+      <!--with content correlation-->
+      <endpoint name="ClientShipOrder"
+       contract="IShipOrder" binding="basicHttpBinding"
+       address="http://localhost:9032/ShipOrder" />
+
+      <!--duplex call to CreditApproval from OrderProcessing3-->
+      <endpoint name="ClientCreditApproval"
+       contract="ICreditApproval" binding="wsHttpContextBinding"
+       bindingConfiguration="ClientCreditApprovalBinding"
+       address="http://localhost:9033/CreditApproval" />
+
+    </client>
+
+    <!--add custom extension in config file-->
+    <!--<extensions>
+      <behaviorExtensions>
+        <add name ="customExtension" type="ServiceLibrary.OrderUtilityExtensionElement, ServiceLibrary"/>
+      </behaviorExtensions>
+    </extensions>-->
+
+    <behaviors>
+      <serviceBehaviors>
+        <behavior>
+          <!--<customExtension></customExtension>-->
+          <serviceDebug includeExceptionDetailInFaults="True"
+           httpHelpPageEnabled="True"/>
+          <serviceMetadata httpGetEnabled="True"/>
+        </behavior>
+      </serviceBehaviors>
+    </behaviors>
+
+  </system.serviceModel>
+
+  <startup>
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.0"/>
+  </startup>
+</configuration>

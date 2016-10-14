@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorkflow", "HelloWorkflow\HelloWorkflow.csproj", "{14374EAA-1319-4729-89E9-00C5B89414AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{F97FF29B-26FA-44C0-968C-9F9CC051BA34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorTest", "CalculatorTest\CalculatorTest.csproj", "{D75549B4-2877-42BC-828B-65B304029BC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorEnum", "CalculatorEnum\CalculatorEnum.csproj", "{B4EC2C9E-D95E-4275-A153-3E61C4E97900}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{14374EAA-1319-4729-89E9-00C5B89414AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14374EAA-1319-4729-89E9-00C5B89414AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14374EAA-1319-4729-89E9-00C5B89414AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14374EAA-1319-4729-89E9-00C5B89414AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F97FF29B-26FA-44C0-968C-9F9CC051BA34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F97FF29B-26FA-44C0-968C-9F9CC051BA34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F97FF29B-26FA-44C0-968C-9F9CC051BA34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F97FF29B-26FA-44C0-968C-9F9CC051BA34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D75549B4-2877-42BC-828B-65B304029BC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D75549B4-2877-42BC-828B-65B304029BC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D75549B4-2877-42BC-828B-65B304029BC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D75549B4-2877-42BC-828B-65B304029BC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4EC2C9E-D95E-4275-A153-3E61C4E97900}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4EC2C9E-D95E-4275-A153-3E61C4E97900}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4EC2C9E-D95E-4275-A153-3E61C4E97900}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4EC2C9E-D95E-4275-A153-3E61C4E97900}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

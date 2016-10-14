@@ -1,0 +1,195 @@
+﻿<!--
+ This file is part of the downloadable code for the Apress book:
+ Pro WF: Windows Workflow in .NET 4.0
+ Copyright (c) Bruce Bukovics.  All rights reserved.
+
+ This code is provided as is without warranty of any kind, either expressed
+ or implied, including but not limited to fitness for any particular purpose.
+ You may use the code for any commercial or noncommercial purpose, and combine
+ it with your own code, but cannot reproduce it in whole or in part for
+ publication purposes without prior approval.
+ -->
+<WorkflowService mc:Ignorable="sap" ConfigurationName="OrderEntryService" sap:VirtualizedContainerService.HintSize="1291,754" Name="OrderEntryService" mva:VisualBasic.Settings="Assembly references and imported namespaces serialized as XML namespaces" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/servicemodel" xmlns:a="clr-namespace:ActivityLibrary;assembly=ServiceLibrary" xmlns:a1="clr-namespace:ActivityLibrary;assembly=OrderEntry" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mv="clr-namespace:Microsoft.VisualBasic;assembly=System" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://tempuri.org/" xmlns:p1="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:s1="clr-namespace:System;assembly=System" xmlns:s2="clr-namespace:System;assembly=System.Xml" xmlns:s3="clr-namespace:System;assembly=System.Core" xmlns:s4="clr-namespace:System;assembly=System.ServiceModel" xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities" xmlns:sad="clr-namespace:System.Activities.Debugger;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System" xmlns:scg1="clr-namespace:System.Collections.Generic;assembly=System.ServiceModel" xmlns:scg2="clr-namespace:System.Collections.Generic;assembly=System.Core" xmlns:scg3="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:sl="clr-namespace:System.Linq;assembly=System.Core" xmlns:ssa="clr-namespace:System.ServiceModel.Activities;assembly=System.ServiceModel.Activities" xmlns:ssx="clr-namespace:System.ServiceModel.XamlIntegration;assembly=System.ServiceModel" xmlns:st="clr-namespace:System.Text;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <p1:While sad:XamlDebuggerXmlReader.FileName="C:\WF\WindowsWorkflowWork\code\chapter 10\ServiceLibrary\OrderEntryServiceDelay.xamlx" sap:VirtualizedContainerService.HintSize="1261,724" mva:VisualBasic.Settings="Assembly references and imported namespaces serialized as XML namespaces">
+    <p1:While.Variables>
+      <p1:Variable x:TypeArguments="x:Boolean" Name="IsDone" />
+      <p1:Variable x:TypeArguments="scg3:List(a:Item)" Default="[New List(Of ActivityLibrary.Item)]" Name="Items" />
+      <p1:Variable x:TypeArguments="x:Int32" Name="OrderId" />
+      <p1:Variable x:TypeArguments="CorrelationHandle" Name="SharedHandle" />
+    </p1:While.Variables>
+    <p1:While.Condition>[Not IsDone]</p1:While.Condition>
+    <p1:Pick sap:VirtualizedContainerService.HintSize="1235,608">
+      <p1:PickBranch DisplayName="StartOrder" sap:VirtualizedContainerService.HintSize="200,562">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg3:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <p1:PickBranch.Trigger>
+          <p1:Sequence sap:VirtualizedContainerService.HintSize="277,344">
+            <p1:Sequence.Variables>
+              <p1:Variable x:TypeArguments="CorrelationHandle" Name="__handle1" />
+            </p1:Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg3:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Receive x:Name="__ReferenceID0" CanCreateInstance="True" sap:VirtualizedContainerService.HintSize="255,90" OperationName="StartOrder" ServiceContractName="p:IOrderEntry">
+              <Receive.CorrelationInitializers>
+                <QueryCorrelationInitializer CorrelationHandle="[SharedHandle]">
+                  <XPathMessageQuery x:Key="key1">
+                    <XPathMessageQuery.Namespaces>
+                      <ssx:XPathMessageContextMarkup>
+                        <x:String x:Key="xgSc">http://tempuri.org/</x:String>
+                      </ssx:XPathMessageContextMarkup>
+                    </XPathMessageQuery.Namespaces>sm:body()/xgSc:StartOrder/xgSc:orderId</XPathMessageQuery>
+                </QueryCorrelationInitializer>
+              </Receive.CorrelationInitializers>
+              <ReceiveParametersContent>
+                <p1:OutArgument x:TypeArguments="x:Int32" x:Key="orderId">[OrderId]</p1:OutArgument>
+              </ReceiveParametersContent>
+            </Receive>
+            <SendReply Request="{x:Reference __ReferenceID0}" DisplayName="SendReplyToReceive" sap:VirtualizedContainerService.HintSize="255,90">
+              <SendParametersContent />
+            </SendReply>
+          </p1:Sequence>
+        </p1:PickBranch.Trigger>
+      </p1:PickBranch>
+      <p1:PickBranch DisplayName="AddItem" sap:VirtualizedContainerService.HintSize="200,562">
+        <p1:PickBranch.Variables>
+          <p1:Variable x:TypeArguments="a:Item" Name="Item" />
+          <p1:Variable x:TypeArguments="x:Boolean" Name="IsInventoryOK" />
+        </p1:PickBranch.Variables>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg3:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <p1:PickBranch.Trigger>
+          <p1:Sequence sap:VirtualizedContainerService.HintSize="522,858">
+            <p1:Sequence.Variables>
+              <p1:Variable x:TypeArguments="CorrelationHandle" Name="__handle1" />
+            </p1:Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg3:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Receive x:Name="__ReferenceID1" CorrelatesWith="[SharedHandle]" sap:VirtualizedContainerService.HintSize="500,90" OperationName="AddItem" ServiceContractName="p:IOrderEntry">
+              <Receive.CorrelatesOn>
+                <XPathMessageQuery x:Key="key1">
+                  <XPathMessageQuery.Namespaces>
+                    <ssx:XPathMessageContextMarkup>
+                      <x:String x:Key="xgSc">http://tempuri.org/</x:String>
+                    </ssx:XPathMessageContextMarkup>
+                  </XPathMessageQuery.Namespaces>sm:body()/xgSc:AddItem/xgSc:orderId</XPathMessageQuery>
+              </Receive.CorrelatesOn>
+              <ReceiveParametersContent>
+                <p1:OutArgument x:TypeArguments="x:Int32" x:Key="orderId">[OrderId]</p1:OutArgument>
+                <p1:OutArgument x:TypeArguments="a:Item" x:Key="item">[Item]</p1:OutArgument>
+              </ReceiveParametersContent>
+            </Receive>
+            <a:CheckInventory sap:VirtualizedContainerService.HintSize="500,22" ItemId="[Item.ItemId]" OrderId="[OrderId]" Quantity="[Item.Quantity]" Result="[IsInventoryOK]" />
+            <p1:If Condition="[IsInventoryOK]" sap:VirtualizedContainerService.HintSize="500,412">
+              <p1:If.Then>
+                <p1:Sequence sap:VirtualizedContainerService.HintSize="264,306">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg3:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <a:GetItemPrice sap:VirtualizedContainerService.HintSize="242,22" ItemId="[Item.ItemId]" Result="[Item.UnitPrice]" />
+                  <p1:Assign sap:VirtualizedContainerService.HintSize="242,58">
+                    <p1:Assign.To>
+                      <p1:OutArgument x:TypeArguments="x:Decimal">[Item.TotalPrice]</p1:OutArgument>
+                    </p1:Assign.To>
+                    <p1:Assign.Value>
+                      <p1:InArgument x:TypeArguments="x:Decimal">[Item.UnitPrice * Item.Quantity]</p1:InArgument>
+                    </p1:Assign.Value>
+                  </p1:Assign>
+                  <p1:AddToCollection x:TypeArguments="a:Item" Collection="[Items]" DisplayName="AddToCollection&lt;Item&gt;" sap:VirtualizedContainerService.HintSize="242,22" Item="[Item]" />
+                </p1:Sequence>
+              </p1:If.Then>
+              <p1:If.Else>
+                <p1:WriteLine sap:VirtualizedContainerService.HintSize="211,306" Text="[String.Format(&quot;Quantity of {0} for Item {1} is unavailable&quot;, Item.Quantity, Item.ItemId)]" />
+              </p1:If.Else>
+            </p1:If>
+            <SendReply Request="{x:Reference __ReferenceID1}" DisplayName="SendReplyToReceive" sap:VirtualizedContainerService.HintSize="500,90">
+              <SendParametersContent />
+            </SendReply>
+          </p1:Sequence>
+        </p1:PickBranch.Trigger>
+      </p1:PickBranch>
+      <p1:PickBranch DisplayName="OrderComplete" sap:VirtualizedContainerService.HintSize="307,562">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg3:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <p1:PickBranch.Trigger>
+          <p1:Sequence sap:VirtualizedContainerService.HintSize="277,344">
+            <p1:Sequence.Variables>
+              <p1:Variable x:TypeArguments="CorrelationHandle" Name="__handle1" />
+            </p1:Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg3:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Receive x:Name="__ReferenceID2" CorrelatesWith="[SharedHandle]" sap:VirtualizedContainerService.HintSize="255,90" OperationName="OrderComplete" ServiceContractName="p:IOrderEntry">
+              <Receive.CorrelatesOn>
+                <XPathMessageQuery x:Key="key1">
+                  <XPathMessageQuery.Namespaces>
+                    <ssx:XPathMessageContextMarkup>
+                      <x:String x:Key="xgSc">http://tempuri.org/</x:String>
+                    </ssx:XPathMessageContextMarkup>
+                  </XPathMessageQuery.Namespaces>sm:body()/xgSc:OrderComplete/xgSc:orderId</XPathMessageQuery>
+              </Receive.CorrelatesOn>
+              <ReceiveParametersContent>
+                <p1:OutArgument x:TypeArguments="x:Int32" x:Key="orderId">[OrderId]</p1:OutArgument>
+              </ReceiveParametersContent>
+            </Receive>
+            <SendReply Request="{x:Reference __ReferenceID2}" DisplayName="SendReplyToReceive" sap:VirtualizedContainerService.HintSize="255,90">
+              <SendParametersContent>
+                <p1:InArgument x:TypeArguments="scg3:List(a:Item)" x:Key="items">[Items]</p1:InArgument>
+              </SendParametersContent>
+            </SendReply>
+          </p1:Sequence>
+        </p1:PickBranch.Trigger>
+        <p1:Assign sap:VirtualizedContainerService.HintSize="277,100">
+          <p1:Assign.To>
+            <p1:OutArgument x:TypeArguments="x:Boolean">[IsDone]</p1:OutArgument>
+          </p1:Assign.To>
+          <p1:Assign.Value>
+            <p1:InArgument x:TypeArguments="x:Boolean">True</p1:InArgument>
+          </p1:Assign.Value>
+        </p1:Assign>
+      </p1:PickBranch>
+      <p1:PickBranch sap:VirtualizedContainerService.HintSize="294,562">
+        <p1:PickBranch.Trigger>
+          <p1:Delay Duration="[TimeSpan.FromSeconds(15)]" sap:VirtualizedContainerService.HintSize="264,100" />
+        </p1:PickBranch.Trigger>
+        <p1:Sequence sap:VirtualizedContainerService.HintSize="264,283">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg3:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <p1:WriteLine sap:VirtualizedContainerService.HintSize="242,61" Text="[String.Format(&quot;Maximum time elapsed - order {0} canceled&quot;, OrderId)]" />
+          <p1:Assign sap:VirtualizedContainerService.HintSize="242,58">
+            <p1:Assign.To>
+              <p1:OutArgument x:TypeArguments="x:Boolean">[IsDone]</p1:OutArgument>
+            </p1:Assign.To>
+            <p1:Assign.Value>
+              <p1:InArgument x:TypeArguments="x:Boolean">True</p1:InArgument>
+            </p1:Assign.Value>
+          </p1:Assign>
+        </p1:Sequence>
+      </p1:PickBranch>
+    </p1:Pick>
+  </p1:While>
+</WorkflowService>

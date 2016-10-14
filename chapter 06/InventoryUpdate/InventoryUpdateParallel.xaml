@@ -1,0 +1,91 @@
+﻿<!--
+ This file is part of the downloadable code for the Apress book:
+ Pro WF: Windows Workflow in .NET 4.0
+ Copyright (c) Bruce Bukovics.  All rights reserved.
+
+ This code is provided as is without warranty of any kind, either expressed
+ or implied, including but not limited to fitness for any particular purpose.
+ You may use the code for any commercial or noncommercial purpose, and combine
+ it with your own code, but cannot reproduce it in whole or in part for
+ publication purposes without prior approval.
+ -->
+<Activity mc:Ignorable="sap" x:Class="InventoryUpdate.InventoryUpdateParallel" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:a="clr-namespace:ActivityLibrary;assembly=ActivityLibrary" xmlns:a1="clr-namespace:ActivityLibrary;assembly=ActivityLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mv="clr-namespace:Microsoft.VisualBasic;assembly=System" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" xmlns:s1="clr-namespace:System;assembly=mscorlib" xmlns:s2="clr-namespace:System;assembly=System" xmlns:s3="clr-namespace:System;assembly=System.Xml" xmlns:s4="clr-namespace:System;assembly=System.Core" xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" xmlns:sad="clr-namespace:System.Activities.Debugger;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:scg1="clr-namespace:System.Collections.Generic;assembly=mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" xmlns:scg2="clr-namespace:System.Collections.Generic;assembly=System" xmlns:scg3="clr-namespace:System.Collections.Generic;assembly=System.ServiceModel" xmlns:scg4="clr-namespace:System.Collections.Generic;assembly=System.Core" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:sd1="clr-namespace:System.Data;assembly=System.Data.DataSetExtensions" xmlns:sl="clr-namespace:System.Linq;assembly=System.Core" xmlns:st="clr-namespace:System.Text;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="ArgSales" Type="InArgument(scg:IList(a:SalesHistory))" />
+    <x:Property Name="ArgInventory" Type="InArgument(scg:IList(a:ItemInventory))" />
+  </x:Members>
+  <mva:VisualBasic.Settings>Assembly references and imported namespaces serialized as XML namespaces</mva:VisualBasic.Settings>
+  <Sequence sad:XamlDebuggerXmlReader.FileName="C:\WF\WindowsWorkflowWork\code\chapter 06\InventoryUpdate\InventoryUpdateParallel.xaml" sap:VirtualizedContainerService.HintSize="585,963">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ParallelForEach x:TypeArguments="a:ItemInventory" DisplayName="PrintInventory" sap:VirtualizedContainerService.HintSize="563,52" Values="[ArgInventory]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ActivityAction x:TypeArguments="a:ItemInventory">
+        <ActivityAction.Argument>
+          <DelegateInArgument x:TypeArguments="a:ItemInventory" Name="item" />
+        </ActivityAction.Argument>
+        <WriteLine sap:VirtualizedContainerService.HintSize="257,100" Text="[String.Format(&quot;Item {0} beginning inventory: {1}&quot;, item.ItemId, item.QuantityOnHand)]" />
+      </ActivityAction>
+    </ParallelForEach>
+    <ParallelForEach x:TypeArguments="a:SalesHistory" DisplayName="ParallelForEach&lt;SalesHistory&gt;" sap:VirtualizedContainerService.HintSize="563,747" Values="[ArgSales]">
+      <ActivityAction x:TypeArguments="a:SalesHistory">
+        <ActivityAction.Argument>
+          <DelegateInArgument x:TypeArguments="a:SalesHistory" Name="item" />
+        </ActivityAction.Argument>
+        <Sequence sap:VirtualizedContainerService.HintSize="533,640">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:Boolean" Name="IsItemExists" />
+          </Sequence.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <WriteLine sap:VirtualizedContainerService.HintSize="511,62" Text="[String.Format(&quot;Sales item: {0} quantity: {1}&quot;, item.ItemId, item.Quantity)]" />
+          <ExistsInCollection x:TypeArguments="a:ItemInventory" Collection="[ArgInventory]" DisplayName="ExistsInCollection&lt;ItemInventory&gt;" sap:VirtualizedContainerService.HintSize="511,22" Item="[New ActivityLibrary.ItemInventory With {.ItemId = item.ItemId}]" Result="[IsItemExists]" />
+          <If Condition="[IsItemExists]" sap:VirtualizedContainerService.HintSize="511,352">
+            <If.Then>
+              <Sequence DisplayName="ExistsSequence" sap:VirtualizedContainerService.HintSize="264,244">
+                <Sequence.Variables>
+                  <Variable x:TypeArguments="a:ItemInventory" Name="FoundItem" />
+                </Sequence.Variables>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <a:FindInCollection x:TypeArguments="a:ItemInventory" Collection="[ArgInventory]" FoundItem="[FoundItem]" sap:VirtualizedContainerService.HintSize="242,22" Item="[New ActivityLibrary.ItemInventory() With {.ItemId = item.ItemId}]" />
+                <Assign sap:VirtualizedContainerService.HintSize="242,58">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Int32">[FoundItem.QuantityOnHand]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Int32">[FoundItem.QuantityOnHand - item.Quantity]</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <Sequence DisplayName="NotExistsSequence" sap:VirtualizedContainerService.HintSize="222,244">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <AddToCollection x:TypeArguments="a:ItemInventory" Collection="[ArgInventory]" DisplayName="AddToCollection&lt;ItemInventory&gt;" sap:VirtualizedContainerService.HintSize="200,22" Item="[New ActivityLibrary.ItemInventory() With {.ItemId = item.ItemId, .QuantityOnHand = (0 - item.Quantity)}]" />
+              </Sequence>
+            </If.Else>
+          </If>
+        </Sequence>
+      </ActivityAction>
+    </ParallelForEach>
+  </Sequence>
+</Activity>

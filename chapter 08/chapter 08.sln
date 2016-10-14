@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActivityLibrary", "ActivityLibrary\ActivityLibrary.csproj", "{5D4328EA-24AF-4D29-979E-BF4C87CB15C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookmarkCalculator", "BookmarkCalculator\BookmarkCalculator.csproj", "{3D9EE673-9484-419F-A110-2F885DE4C820}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookmarkCalculatorAction", "BookmarkCalculatorAction\BookmarkCalculatorAction.csproj", "{F70F7908-C907-4E10-B2E7-A1AE400E9A92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookmarkCalculatorEvent", "BookmarkCalculatorEvent\BookmarkCalculatorEvent.csproj", "{E859D665-F567-4C4D-A30F-06E9E6D83084}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookmarkCalculatorQueue", "BookmarkCalculatorQueue\BookmarkCalculatorQueue.csproj", "{1520A151-449B-4C55-835A-30A7B19C09A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProblemReporting", "ProblemReporting\ProblemReporting.csproj", "{55663C1C-50AF-4D71-8F38-8D7B05881746}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookmarkCalculatorInvokeAction", "BookmarkCalculatorInvokeAction\BookmarkCalculatorInvokeAction.csproj", "{C3DDC68D-DD48-48D7-9E27-0BF2CD2D9DF2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5D4328EA-24AF-4D29-979E-BF4C87CB15C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D4328EA-24AF-4D29-979E-BF4C87CB15C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D4328EA-24AF-4D29-979E-BF4C87CB15C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D4328EA-24AF-4D29-979E-BF4C87CB15C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D9EE673-9484-419F-A110-2F885DE4C820}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D9EE673-9484-419F-A110-2F885DE4C820}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D9EE673-9484-419F-A110-2F885DE4C820}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D9EE673-9484-419F-A110-2F885DE4C820}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F70F7908-C907-4E10-B2E7-A1AE400E9A92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F70F7908-C907-4E10-B2E7-A1AE400E9A92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F70F7908-C907-4E10-B2E7-A1AE400E9A92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F70F7908-C907-4E10-B2E7-A1AE400E9A92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E859D665-F567-4C4D-A30F-06E9E6D83084}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E859D665-F567-4C4D-A30F-06E9E6D83084}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E859D665-F567-4C4D-A30F-06E9E6D83084}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E859D665-F567-4C4D-A30F-06E9E6D83084}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1520A151-449B-4C55-835A-30A7B19C09A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1520A151-449B-4C55-835A-30A7B19C09A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1520A151-449B-4C55-835A-30A7B19C09A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1520A151-449B-4C55-835A-30A7B19C09A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55663C1C-50AF-4D71-8F38-8D7B05881746}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55663C1C-50AF-4D71-8F38-8D7B05881746}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55663C1C-50AF-4D71-8F38-8D7B05881746}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55663C1C-50AF-4D71-8F38-8D7B05881746}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3DDC68D-DD48-48D7-9E27-0BF2CD2D9DF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3DDC68D-DD48-48D7-9E27-0BF2CD2D9DF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3DDC68D-DD48-48D7-9E27-0BF2CD2D9DF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3DDC68D-DD48-48D7-9E27-0BF2CD2D9DF2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

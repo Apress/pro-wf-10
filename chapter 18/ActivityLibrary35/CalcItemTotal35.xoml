@@ -1,0 +1,16 @@
+﻿<!--
+ This file is part of the downloadable code for the Apress book:
+ Pro WF: Windows Workflow in .NET 4.0
+ Copyright (c) Bruce Bukovics.  All rights reserved.
+
+ This code is provided as is without warranty of any kind, either expressed
+ or implied, including but not limited to fitness for any particular purpose.
+ You may use the code for any commercial or noncommercial purpose, and combine
+ it with your own code, but cannot reproduce it in whole or in part for
+ publication purposes without prior approval.
+ -->
+<SequentialWorkflowActivity x:Class="ActivityLibrary35.CalcItemTotal35" x:Name="CalcItemTotal35" xmlns:ns0="clr-namespace:ActivityLibrary35" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/workflow">
+	<ns2:LookupItem35 Weight="{ActivityBind CalcItemTotal35,Path=Weight}" ItemId="{ActivityBind CalcItemTotal35,Path=ItemId}" Price="{ActivityBind CalcItemTotal35,Path=Price}" x:Name="lookupItem351" xmlns:ns2="clr-namespace:ActivityLibrary35" />
+	<CodeActivity x:Name="codeDisplayItem" ExecuteCode="codeDisplayItem_ExecuteCode" />
+	<ns3:CalcShipping35 ShipVia="{ActivityBind CalcItemTotal35,Path=ShipVia}" Result="{ActivityBind CalcItemTotal35,Path=Result}" x:Name="calcShipping351" Weight="{ActivityBind CalcItemTotal35,Path=Weight}" OrderTotal="{ActivityBind CalcItemTotal35,Path=Price}" xmlns:ns3="clr-namespace:ActivityLibrary35" />
+</SequentialWorkflowActivity>

@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+ This file is part of the downloadable code for the Apress book:
+ Pro WF: Windows Workflow in .NET 4.0
+ Copyright (c) Bruce Bukovics.  All rights reserved.
+
+ This code is provided as is without warranty of any kind, either expressed
+ or implied, including but not limited to fitness for any particular purpose.
+ You may use the code for any commercial or noncommercial purpose, and combine
+ it with your own code, but cannot reproduce it in whole or in part for
+ publication purposes without prior approval.
+ -->
+<configuration>
+  <system.web>
+    <compilation debug="true" targetFramework="4.0" />
+  </system.web>
+  <system.serviceModel>
+    <services>
+      
+      <service name="OrderProcessing">
+        <endpoint contract="IOrderProcessing" binding="wsHttpBinding"
+          bindingConfiguration="OrderProcessingBinding" />
+      </service>
+
+      <!--enhanced to call ShipOrder and CreditApproval workflows and
+          use OrderUtilityExtension -->
+      <service name="OrderProcessing4">
+        <endpoint contract="IOrderProcessing"
+          binding="wsHttpContextBinding" />
+        <endpoint contract="IOrderProcessingCallback" address="OrderProcessingCallback"
+          binding="wsHttpContextBinding" />
+      </service>
+      <!--<service name="OrderProcessing4">
+        <endpoint contract="IOrderProcessing"
+          binding="wsHttpBinding"
+          bindingConfiguration="OrderProcessingBinding" />
+        <endpoint contract="IOrderProcessingCallback"
+          binding="wsHttpContextBinding" />
+      </service>-->
+
+      <!--with context correlation-->
+      <service name="ShipOrder">
+        <endpoint contract="IShipOrder"
+          binding="wsHttpContextBinding" />
+      </service>
+
+      <!--with content correlation-->
+      <service name="ShipOrderContent">
+        <endpoint contract="IShipOrder"
+          binding="basicHttpBinding" />
+      </service>
+
+      <service name="CreditApproval">
+        <endpoint contract="ICreditApproval"
+          binding="wsHttpContextBinding" />
+      </service>
+
+    </services>
+    <bindings>
+      <wsHttpBinding>
+        <binding name="OrderProcessingBinding">
+          <security mode="Message">
+            <message clientCredentialType="Windows" algorithmSuite="TripleDesRsa15"
+             establishSecurityContext="true" negotiateServiceCredential="true" />
+          </security>
+        </binding>
+      </wsHttpBinding>
+
+      <wsHttpContextBinding>
+        <!--uses extension to get next orderId-->
+        <binding name="ClientCreditApprovalBinding"
+          clientCallbackAddress="OrderProcessingCallback"/>
+      </wsHttpContextBinding>
+
+    </bindings>
+
+    <client>
+
+      <!--with content correlation-->
+      <endpoint name="ClientShipOrder"
+       contract="IShipOrder" binding="basicHttpBinding"
+       address="ShipOrder" />
+
+      <!--duplex call to CreditApproval from OrderProcessing3-->
+      <endpoint name="ClientCreditApproval"
+       contract="ICreditApproval" binding="wsHttpContextBinding"
+       bindingConfiguration="ClientCreditApprovalBinding"
+       address="CreditApproval" />
+
+    </client>
+
+    <behaviors>
+      <serviceBehaviors>
+        <behavior>
+          <serviceMetadata httpGetEnabled="true"/>
+          <serviceDebug includeExceptionDetailInFaults="false"/>
+        </behavior>
+      </serviceBehaviors>
+    </behaviors>
+  </system.serviceModel>
+  <system.webServer>
+    <modules runAllManagedModulesForAllRequests="true"/>
+  </system.webServer>
+</configuration>

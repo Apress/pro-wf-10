@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<!--
+ This file is part of the downloadable code for the Apress book:
+ Pro WF: Windows Workflow in .NET 4.0
+ Copyright (c) Bruce Bukovics.  All rights reserved.
+
+ This code is provided as is without warranty of any kind, either expressed
+ or implied, including but not limited to fitness for any particular purpose.
+ You may use the code for any commercial or noncommercial purpose, and combine
+ it with your own code, but cannot reproduce it in whole or in part for
+ publication purposes without prior approval.
+ -->
+<configuration>
+  <system.serviceModel>
+    <services>
+      <service name="OrderProcessing5">
+        <host>
+          <baseAddresses>
+            <add baseAddress="http://localhost:9000/"/>
+          </baseAddresses>
+        </host>
+        <endpoint contract="IOrderProcessing"
+          address="http://localhost:9000/OrderProcessing"
+          binding="wsHttpBinding"
+          bindingConfiguration="OrderProcessingBinding" />
+        <endpoint contract="IOrderProcessingCallback"
+          address="http://localhost:9000/OrderProcessingCallback"
+          binding="wsHttpContextBinding" />
+      </service>
+      <service name="ShipOrderContent">
+        <host>
+          <baseAddresses>
+            <add baseAddress="http://localhost:9031/"/>
+          </baseAddresses>
+        </host>
+        <endpoint contract="IShipOrder"
+          address="http://localhost:9031/ShipOrder"
+          binding="basicHttpBinding" />
+      </service>
+      <service name="CreditApproval">
+        <host>
+          <baseAddresses>
+            <add baseAddress="http://localhost:9033/"/>
+          </baseAddresses>
+        </host>
+        <endpoint contract="ICreditApproval"
+          address="http://localhost:9033/CreditApproval"
+          binding="wsHttpContextBinding" />
+      </service>
+    </services>
+
+    <bindings>
+      <wsHttpBinding>
+        <binding name="OrderProcessingBinding">
+          <security mode="Message">
+            <message clientCredentialType="Windows"
+             algorithmSuite="TripleDesRsa15"
+             establishSecurityContext="true"
+             negotiateServiceCredential="true" />
+          </security>
+        </binding>
+      </wsHttpBinding>
+      <wsHttpContextBinding>
+        <binding name="ClientCreditApprovalBinding"
+          clientCallbackAddress="http://localhost:9000/OrderProcessingCallback"/>
+      </wsHttpContextBinding>
+    </bindings>
+
+    <client>
+      <endpoint name="ClientShipOrder"
+       contract="IShipOrder" binding="basicHttpBinding"
+       address="http://localhost:9031/ShipOrder" />
+      <endpoint name="ClientCreditApproval"
+       contract="ICreditApproval" binding="wsHttpContextBinding"
+       bindingConfiguration="ClientCreditApprovalBinding"
+       address="http://localhost:9033/CreditApproval" />
+    </client>
+
+    <behaviors>
+      <serviceBehaviors>
+        <behavior>
+          <serviceDebug includeExceptionDetailInFaults="True"
+           httpHelpPageEnabled="True"/>
+          <serviceMetadata httpGetEnabled="True"/>
+        </behavior>
+      </serviceBehaviors>
+    </behaviors>
+
+  </system.serviceModel>
+
+  <startup>
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.0"/>
+  </startup>
+</configuration>

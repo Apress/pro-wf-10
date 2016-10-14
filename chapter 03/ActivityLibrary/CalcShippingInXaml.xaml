@@ -1,0 +1,72 @@
+<!--
+ This file is part of the downloadable code for the Apress book:
+ Pro WF: Windows Workflow in .NET 4.0
+ Copyright (c) Bruce Bukovics.  All rights reserved.
+
+ This code is provided as is without warranty of any kind, either expressed
+ or implied, including but not limited to fitness for any particular purpose.
+ You may use the code for any commercial or noncommercial purpose, and combine
+ it with your own code, but cannot reproduce it in whole or in part for
+ publication purposes without prior approval.
+ -->
+<p:Activity mc:Ignorable="" x:Class="ActivityLibrary.CalcShippingInXaml" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities/design" xmlns:__CalcShippingInXaml="clr-namespace:ActivityLibrary;" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:p="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sad="clr-namespace:System.Activities.Debugger;assembly=System.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="Weight" Type="p:InArgument(x:Int32)" />
+    <x:Property Name="OrderTotal" Type="p:InArgument(s:Decimal)" />
+    <x:Property Name="ShipVia" Type="p:InArgument(x:String)" />
+    <x:Property Name="Result" Type="p:OutArgument(s:Decimal)" />
+  </x:Members>
+  <p:Sequence sad:XamlDebuggerXmlReader.FileName="C:\WF\WindowsWorkflowWork\code\chapter 03\ActivityLibrary\CalcShippingInXaml.xaml">
+    <p:Sequence.Variables>
+      <p:Variable x:TypeArguments="x:Boolean" Name="IsFreeShipping" />
+      <p:Variable x:TypeArguments="s:Decimal" Default="[1.95D]" Name="NormalRate" />
+      <p:Variable x:TypeArguments="s:Decimal" Default="[3.5D]" Name="ExpressRate" />
+      <p:Variable x:TypeArguments="s:Decimal" Default="[12.95D]" Name="Minimum" />
+      <p:Variable x:TypeArguments="s:Decimal" Default="[75D]" Name="FreeThreshold" />
+    </p:Sequence.Variables>
+    <p:Switch x:TypeArguments="x:String" Expression="[ShipVia]">
+      <p:If x:Key="normal" Condition="[OrderTotal &gt;= FreeThreshold]">
+        <p:If.Else>
+          <p:Assign>
+            <p:Assign.To>
+              <p:OutArgument x:TypeArguments="s:Decimal">[Result]</p:OutArgument>
+            </p:Assign.To>
+            <p:Assign.Value>
+              <p:InArgument x:TypeArguments="s:Decimal">[Weight * NormalRate]</p:InArgument>
+            </p:Assign.Value>
+          </p:Assign>
+        </p:If.Else>
+        <p:If.Then>
+          <p:Assign>
+            <p:Assign.To>
+              <p:OutArgument x:TypeArguments="x:Boolean">[IsFreeShipping]</p:OutArgument>
+            </p:Assign.To>
+            <p:Assign.Value>
+              <p:InArgument x:TypeArguments="x:Boolean">[True]</p:InArgument>
+            </p:Assign.Value>
+          </p:Assign>
+        </p:If.Then>
+      </p:If>
+      <p:Assign x:Key="express">
+        <p:Assign.To>
+          <p:OutArgument x:TypeArguments="s:Decimal">[Result]</p:OutArgument>
+        </p:Assign.To>
+        <p:Assign.Value>
+          <p:InArgument x:TypeArguments="s:Decimal">[Weight * ExpressRate]</p:InArgument>
+        </p:Assign.Value>
+      </p:Assign>
+    </p:Switch>
+    <p:If Condition="[Result &lt; Minimum And Not IsFreeShipping]">
+      <p:If.Then>
+        <p:Assign>
+          <p:Assign.To>
+            <p:OutArgument x:TypeArguments="s:Decimal">[Result]</p:OutArgument>
+          </p:Assign.To>
+          <p:Assign.Value>
+            <p:InArgument x:TypeArguments="s:Decimal">[Minimum]</p:InArgument>
+          </p:Assign.Value>
+        </p:Assign>
+      </p:If.Then>
+    </p:If>
+  </p:Sequence>
+</p:Activity>

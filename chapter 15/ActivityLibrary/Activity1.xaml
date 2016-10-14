@@ -1,0 +1,116 @@
+﻿<!--
+ This file is part of the downloadable code for the Apress book:
+ Pro WF: Windows Workflow in .NET 4.0
+ Copyright (c) Bruce Bukovics.  All rights reserved.
+
+ This code is provided as is without warranty of any kind, either expressed
+ or implied, including but not limited to fitness for any particular purpose.
+ You may use the code for any commercial or noncommercial purpose, and combine
+ it with your own code, but cannot reproduce it in whole or in part for
+ publication purposes without prior approval.
+ -->
+<Activity mc:Ignorable="sap" x:Class="ActivityLibrary.Activity1" sap:VirtualizedContainerService.HintSize="352,1714" mva:VisualBasic.Settings="Assembly references and imported namespaces for internal implementation" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:local="clr-namespace:ActivityLibrary" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mv="clr-namespace:Microsoft.VisualBasic;assembly=System" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:s1="clr-namespace:System;assembly=System" xmlns:s2="clr-namespace:System;assembly=System.Xml" xmlns:s3="clr-namespace:System;assembly=System.Core" xmlns:s4="clr-namespace:System;assembly=System.ServiceModel" xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities" xmlns:sad="clr-namespace:System.Activities.Debugger;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System" xmlns:scg1="clr-namespace:System.Collections.Generic;assembly=System.ServiceModel" xmlns:scg2="clr-namespace:System.Collections.Generic;assembly=System.Core" xmlns:scg3="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:sl="clr-namespace:System.Linq;assembly=System.Core" xmlns:st="clr-namespace:System.Text;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <sap:WorkflowViewStateService.ViewState>
+    <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+      <x:Boolean x:Key="ShouldCollapseAll">True</x:Boolean>
+      <x:Boolean x:Key="ShouldExpandAll">False</x:Boolean>
+    </scg3:Dictionary>
+  </sap:WorkflowViewStateService.ViewState>
+  <Sequence sad:XamlDebuggerXmlReader.FileName="C:\WF\WindowsWorkflowWork\code\chapter 13\ActivityLibrary\Activity1.xaml" sap:VirtualizedContainerService.HintSize="312,1674">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:Int32" Name="weight" />
+      <Variable x:TypeArguments="x:Decimal" Name="myResult" />
+      <Variable x:TypeArguments="scg3:List(x:String)" Name="myStringList" />
+      <Variable x:TypeArguments="x:String" Name="myString" />
+      <Variable x:TypeArguments="x:Int32" Name="ArgWeight" />
+      <Variable x:TypeArguments="x:Decimal" Name="ArgOrderTotal" />
+      <Variable x:TypeArguments="x:String" Name="ArgShipVia" />
+      <Variable x:TypeArguments="x:Decimal" Name="ArgShippingTotal" />
+      <Variable x:TypeArguments="x:Int32" Name="ArgItemCount" />
+      <Variable x:TypeArguments="x:Int32" Name="ItemsToProcess" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg3:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <local:TitleLookup Author="{x:Null}" ISBN="{x:Null}" Title="{x:Null}" Category="a" sap:VirtualizedContainerService.HintSize="290,22" Keyword="k" />
+    <local:TitleLookup Author="{x:Null}" Category="{x:Null}" Keyword="{x:Null}" Title="{x:Null}" sap:VirtualizedContainerService.HintSize="290,22" ISBN="isbn" />
+    <local:MyActivityWithAction sap:VirtualizedContainerService.HintSize="290,265" Strings="[myStringList]">
+      <local:MyActivityWithAction.Notify>
+        <ActivityAction x:TypeArguments="x:String">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:String" Name="message" />
+          </ActivityAction.Argument>
+          <Sequence sap:VirtualizedContainerService.HintSize="233,185">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">True</x:Boolean>
+              </scg3:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <WriteLine sap:VirtualizedContainerService.HintSize="211,61" Text="[message]" />
+          </Sequence>
+        </ActivityAction>
+      </local:MyActivityWithAction.Notify>
+    </local:MyActivityWithAction>
+    <local:MySequence Condition="[ItemsToProcess &gt; 0]" sap:VirtualizedContainerService.HintSize="290,248">
+      <local:MySequence.Variables>
+        <sco:Collection x:TypeArguments="Variable" />
+      </local:MySequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsPinned">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg3:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <WriteLine sap:VirtualizedContainerService.HintSize="242,61" Text="Processing item" />
+      <Assign sap:VirtualizedContainerService.HintSize="242,58">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:Int32">[ItemsToProcess]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:Int32">[ItemsToProcess - 1]</InArgument>
+        </Assign.Value>
+      </Assign>
+    </local:MySequence>
+    <local:MyWhile Condition="[ItemsToProcess &gt; 0]" sap:VirtualizedContainerService.HintSize="290,363">
+      <local:MyWhile.Body>
+        <Sequence sap:VirtualizedContainerService.HintSize="264,283">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">True</x:Boolean>
+            </scg3:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <WriteLine sap:VirtualizedContainerService.HintSize="242,61" Text="Processing item" />
+          <Assign sap:VirtualizedContainerService.HintSize="242,58">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Int32">[ItemsToProcess]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Int32">[ItemsToProcess - 1]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </Sequence>
+      </local:MyWhile.Body>
+    </local:MyWhile>
+    <local:CalcShippingWithCollapsibleDesigner DisplayName="CalcShipping" sap:VirtualizedContainerService.HintSize="290,164" OrderTotal="[ArgOrderTotal]" Result="[ArgShippingTotal]" ShipVia="express" Weight="[Math.Max(ArgWeight, 1)]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">True</x:Boolean>
+        </scg3:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </local:CalcShippingWithCollapsibleDesigner>
+    <local:CalcShippingWithDesigner DisplayName="CalcShipping" sap:VirtualizedContainerService.HintSize="290,164" OrderTotal="[ArgOrderTotal]" Result="[ArgShippingTotal]" ShipVia="express" Weight="[Math.Max(ArgWeight, 1)]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg3:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </local:CalcShippingWithDesigner>
+    <local:CalcShipping OrderTotal="{x:Null}" ShipVia="{x:Null}" Weight="{x:Null}" sap:VirtualizedContainerService.HintSize="290,22" />
+  </Sequence>
+</Activity>

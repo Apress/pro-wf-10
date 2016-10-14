@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+ This file is part of the downloadable code for the Apress book:
+ Pro WF: Windows Workflow in .NET 4.0
+ Copyright (c) Bruce Bukovics.  All rights reserved.
+
+ This code is provided as is without warranty of any kind, either expressed
+ or implied, including but not limited to fitness for any particular purpose.
+ You may use the code for any commercial or noncommercial purpose, and combine
+ it with your own code, but cannot reproduce it in whole or in part for
+ publication purposes without prior approval.
+ -->
+
+<!--this version shows how to load the standard SQL Server
+instance store in the config file instead of in code.-->
+
+
+<configuration>
+  <connectionStrings>
+    <add name="InstanceStore"
+        connectionString="Data Source=localhost\SQLExpress;
+           Initial Catalog=InstanceStore;Integrated Security=True;
+           Asynchronous Processing=True"
+        providerName="System.Data.SqlClient" />
+  </connectionStrings>
+  <system.serviceModel>
+    <services>
+      <service name="OrderEntryService">
+        <host>
+          <baseAddresses>
+            <add baseAddress="http://localhost:9000/"/>
+          </baseAddresses>
+        </host>
+        <endpoint contract="IOrderEntry"
+          address="http://localhost:9000/OrderEntry"
+          binding="wsHttpBinding" />
+      </service>
+    </services>
+
+    <behaviors>
+      <serviceBehaviors>
+        <behavior>
+          <serviceMetadata httpGetEnabled="true"/>
+          <serviceDebug includeExceptionDetailInFaults="false"/>
+          <sqlWorkflowInstanceStore
+            connectionStringName="InstanceStore"
+            instanceCompletionAction="DeleteAll"
+            instanceLockedExceptionAction="BasicRetry"
+            instanceEncodingOption="GZip"
+            hostLockRenewalPeriod="00:01:00" />
+        </behavior>
+      </serviceBehaviors>
+    </behaviors>
+    <serviceHostingEnvironment multipleSiteBindingsEnabled="true" />
+  </system.serviceModel>
+
+  <startup>
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.0"/>
+  </startup>
+</configuration>
